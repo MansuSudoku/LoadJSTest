@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<body bgcolor = "blue">
+<script id="GDscript" > </script>
+
+
+<h1>My meddling with strings </h1>
+
+<p id="demo">paragraph for load of stringy stuff</p>
+
+<button type="button" onclick="stringUp()">Click Me!</button>
+
+<button type="button" onclick="LoadJSScript()">Click To load script!</button>
+
+
+
+<script>
+
+function LoadJSScript()
+{
+//alert("reached LoadScript fn");
+// var SCR = document.getElementById("GDscript");
+// SCR.src = "Strings.js";
+const script = document.createElement("script");
+var myURL = "https://drive.google.com/uc?export=view&id=1ePsZX6jDraLO87MN06xfIYGr_RZoZ8v8";
+script.src = myURL;
+console.log(myURL);
+//script.async = true; // Optional: load asynchronously
+document.head.appendChild(script);
+
+}
+
+
+var strInd =0;
+/*
+function startLoad()
+{
+
+
+const xhttp = new XMLHttpRequest();
+alert("started script update");
+xhttp.onload = function() {
+    document.getElementById("demo").innerHTML = this.responseText;
+alert("reached onload fnc"); //+ this.responseText);
+
+  }
+
+//xhttp.open("GET", "https://drive.google.com/uc?export=view&id=1MoABbA3hv8OpAFOP_ImPoqMP_ULxyqlk", true);
+xhttp.open("GET", "https://drive.google.com/uc?export=view&id=1AaSxbRKsgdKBdiaOUai7mVwFzyASCRS2", true);
+
+xhttp.send();
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+
+alert("reached the end of button script now");
+}
+
+function remCharString(c2rem, srcString)
+{
+var newString ="";
+for(var i=0; i< srcString.length; i++){
+  if(srcString[i] != c2rem){
+	newString+= srcString[i];
+      }// end if
+       else newString+= " ";
+}//end for i
+return (newString);
+}
+
+
+function stringUp()
+{
+ var parag = document.getElementById("demo");
+ var inStr = parag.innerHTML; //"ABCDEFGHIJKLMNOP";
+  parag.innerHTML = remCharString(inStr[strInd], inStr);
+strInd++;
+ //parag.innerHTML += "replaced+";
+//parag.innerHTML = inStr;
+
+}
+*/
+
+</script>
+
+</body>
+</html>
