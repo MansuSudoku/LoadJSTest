@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="PatRestapi.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        var mycanv = null
+        var myImg = null
+        var ctx = null;
+        var frame = 0;
+        var xOut = 0;
+        var framSize = 130;
+        var myButCan = null;
+        var ButCanCTX = null;
+        var spriteBut = null;
+        var Butx = 0;
+        var Buty = 0;
+
+
+
+
+        async function loadGitHubFile() {
+            const owner = 'username';       // GitHub username or org
+            const repo = 'repository-name'; // repo name
+            const branch = 'main';         // branch name
+            const file = 'path/to/file.txt'; // file path in repo
+
+            const url = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${file}`;
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                const text = await response.text(); // or .json() if JSON
+                console.log(text);
+            } catch (err) {
+                console.error('Failed to fetch file:', err);
+            }
+        }
+
+
+
+
+
+
+
+
+
+        function gettheFile() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "https://jsonplaceholder.typicode.com/posts/1");
+            xhr.send();
+            xhr.responseType = "json";
+            xhr.onload = () => {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    console.log(xhr.response);
+                } else {
+                    console.log(`Error: ${xhr.status}`);
+                }
+            };
+           
+        }
+
+
+
+        function updatedFrame(){
+           
+            if (frame > 7) frame = 0;
+            if (xOut > (mycanv.width - framSize)) {
+                ctx.fillStyle = "darkgreen";
+                ctx.fillRect(xOut - 5, xOut - 5, framSize, framSize);
+                xOut = 0;
+            }
+            if (Butx > 500) Butx = 0;
+            if (Buty >  300) Buty = 0;
+            ctx.fillStyle = "darkgreen";
+            ctx.fillRect(xOut - 5, xOut - 5, framSize, framSize);
+            ctx.drawImage(myImg, frame * framSize, 0, framSize, framSize, xOut, xOut, framSize, framSize);
+
+            spriteBut.style.left = Butx;
+          //  spriteBut.style.top = Buty;
+          //   ButCanCTX.drawImage(myImg, frame * framSize, 0, framSize, framSize, 0, 0, mycanv.width, mycanv.height);
+            frame++;
+            xOut += 5;
+            Butx++;
+            Buty++;
+        }
+
+        function animSprite(){
+             mycanv = document.getElementById("outDisplay");
+            myImg = document.getElementById("Frames");
+            spriteBut = document.getElementById("SpriteBut");
+            myButCan = document.getElementById("ButCanv");
+            ButCanCTX = myButCan.getContext("2d");
+            ctx = mycanv.getContext("2d");
+            setInterval(updatedFrame, 1000);
+        }
+    </script>
+</head>
+<body style="background-color:darkgreen">
+    <button id="SpriteBut" style="position:absolute; top:400px ; left:400px; width:150px; height:150px">
+        <canvas id="ButCanv" style="width:150px;height:150px"></canvas>
+    </button>
+    <img id="Frames" src="GanSprite.jpg" style="display:none" />
+    <canvas id="outDisplay" width="300" height="300" style="background-color: darkgreen; position: center"></canvas>
+    <button onclick="animSprite()">animSprite</button>
+    <button onclick="gettheFile()">Fetch file to console</button>
+
+    <button onclick="gettheFile()"></button>
+</body>
+</html>
